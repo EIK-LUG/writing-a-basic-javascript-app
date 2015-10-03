@@ -13,11 +13,16 @@
     //These constant are just used to refer to the pomodoro state.
     window.pomodoroStateConstants = {
         STOPPED : "The pomodoro is stopped",
-        RUNNING : "The pomodoro is running"
+        RUNNING : "The pomodoro is running",
+        RUNNING_WORK: "The pomodoro is in work mode",
+        RUNNING_REST: "The pomodoro is in rest mode"
     };
 
     //What state is the pomodoro currently in.
     window.pomodoroState = window.pomodoroStateConstants.STOPPED;
+
+    //Which interval is the pomodoro currently in. Stopped if not running.
+    window.pomodorInterval = window.pomodoroStateConstants.STOPPED;
 
     //The time currently being counted down from, -1 if pomodoro stopped
     window.currentPomodoroTime = -1;
@@ -31,6 +36,17 @@
 })();
 
 /*
+* This function will handle converting the current pomodoro running time to the label displayed in the HTML
+*
+* @param {Number} pomodoroRunningTime
+* @return {String} label to be displayed on countdown counter.
+*
+* */
+function pomodoroTimeToLabel(pomodoroRunningTime) {
+
+}
+
+/*
 * This function will handle everything associated with switching state.
 *
 * */
@@ -41,6 +57,27 @@ function toggleState() {
     //Change button label
 
     //Change current pomodoro running time
+
+}
+
+/*
+* This function will take the pomodoro running time and check if it is time for a state switch.
+* */
+function isOver(pomodoroRunningTime) {
+
+    return pomodoroRunningTime <= 0;
+
+}
+
+/*
+* The timer mechanism itself will just be calling this function every 1000ms.
+*
+* This function will handle updating the timer values.
+*
+* */
+function updateTimer() {
+
+    window.currentPomodoroTime--;
 
 }
 
