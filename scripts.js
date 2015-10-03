@@ -21,8 +21,11 @@
     //What state is the pomodoro currently in.
     window.pomodoroState = window.pomodoroStateConstants.STOPPED;
 
-    //Which interval is the pomodoro currently in. Stopped if not running.
-    window.pomodorInterval = window.pomodoroStateConstants.STOPPED;
+    //Which interval is the pomodoro currently in.
+    window.pomodorInterval = undefined;
+
+    //Next pomodoro interval
+    window.pomodorNextInterval = undefined;
 
     //The time currently being counted down from, -1 if pomodoro stopped
     window.currentPomodoroTime = -1;
@@ -46,7 +49,7 @@
 *
 * */
 function pomodoroTimeToLabel(pomodoroRunningTime) {
-
+    return pomodoroRunningTime;
 }
 
 /*
@@ -102,7 +105,27 @@ function isOver(pomodoroRunningTime) {
 * */
 function updateTimer() {
 
-    window.currentPomodoroTime--;
+    if (!isOver(window.currentPomodoroTime)) {
+        window.currentPomodoroTime--;
+    } else {
+
+        var tmpNextInterval = window.pomodorNextInterval;
+
+        window.pomodorNextInterval = window.pomodorInterval;
+        window.pomodorInterval = tmpNextInterval;
+
+        console.log(window.pomodorNextInterval);
+
+        if (window.pomodorNextInterval == window.pomodoroStateConstants.RUNNING_WORK) {
+            window.currentPomodoroTime = window.pomodoroWorkTimeLength;
+        } else if (window.pomodorNextInterval == window.pomodoroStateConstants.RUNNING_REST) {
+            window.currentPomodoroTime = window.pomodoroRestTImeLength;
+        } else {
+            alert("Problem in updateTimer()");
+        }
+    }
+
+    document.getElementById("display").textContent = pomodoroTimeToLabel(window.currentPomodoroTime);
 
 }
 
@@ -111,6 +134,10 @@ function updateTimer() {
 *
 * */
 function startPomodoro() {
+
+    //Set up initial Interval states
+    window.pomodorInterval = window.pomodoroStateConstants.RUNNING_WORK;
+    window.pomodorNextInterval = window.pomodoroStateConstants.RUNNING_REST;
 
     //Switch state
     toggleState();
