@@ -81,7 +81,7 @@ function pomTimeToLabel(pomRunTime) {
 function toggleState() {
 
     //Select the DOM element (HTML tag) with the id display.
-    var actionButton = document.getElementById("actionButton");
+    var actionButtonIcon = document.getElementById("actionButtonIcon");
 
     //Change state variables
     if (window.pomState == window.Constants.STOPPED) {
@@ -92,7 +92,7 @@ function toggleState() {
         window.currPomTime = window.pomWorkTime;
 
         //Change button label
-        actionButton.textContent = "Stop Pomodoro";
+        actionButtonIcon.textContent = "stop";
 
     } else if (window.pomState == window.Constants.RUNNING) {
 
@@ -102,7 +102,7 @@ function toggleState() {
         window.currPomTime = -1;
 
         //Change button label
-        actionButton.textContent = "Start Pomodoro"
+        actionButtonIcon.textContent = "play_arrow"
 
     } else {
         console.log("Problem in toggleState()");
