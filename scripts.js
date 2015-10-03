@@ -49,7 +49,30 @@
 *
 * */
 function pomodoroTimeToLabel(pomodoroRunningTime) {
-    return pomodoroRunningTime;
+
+    function pad(x) {
+        if (x < 10) {
+            return "0"+x;
+        } else {
+            return x
+        }
+    }
+
+    var hours = 0;
+    var minutes = 0;
+    var seconds = pomodoroRunningTime;
+
+    while (seconds > 60) {
+        seconds -= 60;
+        minutes++;
+    }
+
+    while (minutes > 60) {
+        minutes -= 60;
+        hours++;
+    }
+
+    return pad(hours.toString()) + ":" + pad(minutes.toString()) + ":" + pad(seconds.toString());
 }
 
 /*
