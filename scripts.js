@@ -33,6 +33,9 @@
     //Minutes that the Rest phase of the pomodoro lasts.
     window.pomodoroRestTImeLength = 5;
 
+    //This ID will be used to reference the interval running the timer
+    window.intervalID = undefined;
+
 })();
 
 /*
@@ -112,7 +115,10 @@ function startPomodoro() {
     //Switch state
     toggleState();
 
-    //Activate countdown
+    //Activate countdown. Every 1000ms, update timer will be called. Also the interval ID is returned.
+    window.intervalID = window.setInterval(function() {
+        updateTimer();
+    }, 1000)
 
 }
 
@@ -125,6 +131,7 @@ function stopPomodoro() {
     toggleState();
 
     //Deactivate countdown
+    clearInterval(window.intervalID);
 
 }
 
