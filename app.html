@@ -2,24 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pomodoro</title>
-    <link rel=stylesheet type="text/css" href="styles.css">
 
+    <title>Pomodoro Lite</title>
+
+    <link rel=stylesheet type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.brown-red.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 </head>
 <body>
 
-    <div id="wrapping_div">
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <div class="mdl-layout-spacer"></div>
+                <span class="mdl-layout-title">Pomodoro lite</span>
+                <div class="mdl-layout-spacer"></div>
+            </div>
+        </header>
+        <main class="mdl-layout__content">
+            <div class="page-content">
 
-        <div id="display">
-            00:00:00
-        </div>
+                <!-- Your content goes here -->
+
+                <div class="mdl-grid">
+                    <div class="mdl-layout-spacer"></div>
+
+                    <div id="wrapping_div"
+                         class="mdl-cell mdl-cell--4-col">
+                        <div id="display">
+                            00:00:00
+                        </div>
+                    </div>
+
+                    <div class="mdl-layout-spacer"></div>
+                </div>
+
+
+            </div>
+
+        </main>
 
         <button id="actionButton"
                 onclick="onActionButtonClicked()"
-                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                class="fixed-bottom-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
             <i id="actionButtonIcon"
                class="material-icons">play_arrow</i>
         </button>
