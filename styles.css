@@ -4,3 +4,7 @@
     bottom: 25px;
     z-index: 1;
 }
+
+#display {
+    text-align: center;
+}

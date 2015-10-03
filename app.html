@@ -8,6 +8,7 @@
     <link rel=stylesheet type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.brown-red.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
 </head>
 <body>
@@ -15,7 +16,8 @@
     <!-- Always shows a header, even in smaller screens. -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row">
+            <div class="mdl-layout__header-row"
+                    style="padding: 0">
                 <!-- Title -->
                 <div class="mdl-layout-spacer"></div>
                 <span class="mdl-layout-title">Pomodoro lite</span>
@@ -30,11 +32,12 @@
                 <div class="mdl-grid">
                     <div class="mdl-layout-spacer"></div>
 
-                    <div id="wrapping_div"
-                         class="mdl-cell mdl-cell--4-col">
-                        <div id="display">
+                    <div class="mdl-cell mdl-cell--4-col">
+
+                        <h3 id="display">
                             00:00:00
-                        </div>
+                        </h3>
+
                     </div>
 
                     <div class="mdl-layout-spacer"></div>
