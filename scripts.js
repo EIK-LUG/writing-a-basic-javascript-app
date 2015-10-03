@@ -11,30 +11,30 @@
 (function() {
 
     //These constant are just used to refer to the pomodoro state.
-    window.pomodoroStateConstants = {
+    window.Constants = {
         STOPPED : "The pomodoro is stopped",
         RUNNING : "The pomodoro is running",
-        RUNNING_WORK: "The pomodoro is in work mode",
-        RUNNING_REST: "The pomodoro is in rest mode"
+        INTERVAL_WORK: "The pomodoro is in work mode",
+        INTERVAL_REST: "The pomodoro is in rest mode"
     };
 
     //What state is the pomodoro currently in.
-    window.pomodoroState = window.pomodoroStateConstants.STOPPED;
+    window.pomState = window.Constants.STOPPED;
 
     //Which interval is the pomodoro currently in.
-    window.pomodorInterval = undefined;
+    window.pomInterval = undefined;
 
     //Next pomodoro interval
-    window.pomodorNextInterval = undefined;
+    window.pomNextInterval = undefined;
 
     //The time currently being counted down from, -1 if pomodoro stopped
-    window.currentPomodoroTime = -1;
+    window.currPomTime = -1;
 
     //Minutes (seconds in testing) that the Work phase of the pomodoro lasts
-    window.pomodoroWorkTimeLength = 25;
+    window.pomWorkTime = 25;
 
     //Minutes (seconds in testing) that the Rest phase of the pomodoro lasts.
-    window.pomodoroRestTImeLength = 5;
+    window.pomRestTime = 5;
 
     //This ID will be used to reference the interval running the timer
     window.intervalID = undefined;
@@ -48,32 +48,27 @@
 * @return {String} label to be displayed on countdown counter.
 *
 * */
-function pomodoroTimeToLabel(pomodoroRunningTime) {
+function pomTimeToLabel(pomRunTime) {
 
-    if (pomodoroRunningTime == -1) {
+    if (pomRunTime == -1) {
         return "00:00:00";
     }
 
     function pad(x) {
-        if (x < 10) {
-            return "0"+x;
-        } else {
-            return x
-        }
+        return x < 10 ? "0" + x : x;
     }
 
-    var hours = 0;
-    var minutes = 0;
-    var seconds = pomodoroRunningTime;
+    var hours, minutes, seconds;
+    hours = minutes = 0;
+    seconds = pomRunTime;
 
     while (seconds > 60) {
         seconds -= 60;
         minutes++;
-    }
-
-    while (minutes > 60) {
-        minutes -= 60;
-        hours++;
+        if (minutes > 60) {
+            minutes -= 60;
+            hours++;
+        }
     }
 
     return pad(hours.toString()) + ":" + pad(minutes.toString()) + ":" + pad(seconds.toString());
@@ -89,28 +84,28 @@ function toggleState() {
     var actionButton = document.getElementById("actionButton");
 
     //Change state variables
-    if (window.pomodoroState == window.pomodoroStateConstants.STOPPED) {
+    if (window.pomState == window.Constants.STOPPED) {
 
-        window.pomodoroState = window.pomodoroStateConstants.RUNNING;
+        window.pomState = window.Constants.RUNNING;
 
         //Change current pomodoro running time
-        window.currentPomodoroTime = window.pomodoroWorkTimeLength;
+        window.currPomTime = window.pomWorkTime;
 
         //Change button label
         actionButton.textContent = "Stop Pomodoro";
 
-    } else if (window.pomodoroState == window.pomodoroStateConstants.RUNNING) {
+    } else if (window.pomState == window.Constants.RUNNING) {
 
-        window.pomodoroState = window.pomodoroStateConstants.STOPPED;
+        window.pomState = window.Constants.STOPPED;
 
         //Change current pomodoro running time
-        window.currentPomodoroTime = -1;
+        window.currPomTime = -1;
 
         //Change button label
         actionButton.textContent = "Start Pomodoro"
 
     } else {
-        alert("Problem is toggleState()");
+        console.log("Problem in toggleState()");
     }
 
 }
@@ -132,25 +127,25 @@ function isOver(pomodoroRunningTime) {
 * */
 function updateTimer() {
 
-    if (!isOver(window.currentPomodoroTime)) {
-        window.currentPomodoroTime--;
+    if (!isOver(window.currPomTime)) {
+        window.currPomTime--;
     } else {
 
-        var tmpNextInterval = window.pomodorNextInterval;
+        var tmpNextInterval = window.pomNextInterval;
 
-        window.pomodorNextInterval = window.pomodorInterval;
-        window.pomodorInterval = tmpNextInterval;
+        window.pomNextInterval = window.pomInterval;
+        window.pomInterval = tmpNextInterval;
 
-        if (window.pomodorInterval == window.pomodoroStateConstants.RUNNING_WORK) {
-            window.currentPomodoroTime = window.pomodoroWorkTimeLength;
-        } else if (window.pomodorInterval == window.pomodoroStateConstants.RUNNING_REST) {
-            window.currentPomodoroTime = window.pomodoroRestTImeLength;
+        if (window.pomInterval == window.Constants.INTERVAL_WORK) {
+            window.currPomTime = window.pomWorkTime;
+        } else if (window.pomInterval == window.Constants.INTERVAL_REST) {
+            window.currPomTime = window.pomRestTime;
         } else {
-            alert("Problem in updateTimer()");
+            console.log("Problem in updateTimer()");
         }
     }
 
-    document.getElementById("display").textContent = pomodoroTimeToLabel(window.currentPomodoroTime);
+    document.getElementById("display").textContent = pomTimeToLabel(window.currPomTime);
 
 }
 
@@ -161,16 +156,14 @@ function updateTimer() {
 function startPomodoro() {
 
     //Set up initial Interval states
-    window.pomodorInterval = window.pomodoroStateConstants.RUNNING_WORK;
-    window.pomodorNextInterval = window.pomodoroStateConstants.RUNNING_REST;
+    window.pomInterval = window.Constants.INTERVAL_WORK;
+    window.pomNextInterval = window.Constants.INTERVAL_REST;
 
     //Switch state
     toggleState();
 
     //Activate countdown. Every 1000ms, update timer will be called. Also the interval ID is returned.
-    window.intervalID = window.setInterval(function() {
-        updateTimer();
-    }, 1000)
+    window.intervalID = window.setInterval(updateTimer, 1000)
 
 }
 
@@ -191,13 +184,13 @@ function stopPomodoro() {
 * This function will handle what happens if the action button is clicked
 * */
 function onActionButtonClicked() {
-    var state = window.pomodoroState;
+    var state = window.pomState;
 
-    if (state == window.pomodoroStateConstants.STOPPED) {
+    if (state == window.Constants.STOPPED) {
         startPomodoro();
-    } else if (state == window.pomodoroStateConstants.RUNNING) {
+    } else if (state == window.Constants.RUNNING) {
         stopPomodoro();
     } else {
-        alert("Oops, something went wrong..");
+        console.log("Undefined behaviour in onActionButtonClicked");
     }
 }
