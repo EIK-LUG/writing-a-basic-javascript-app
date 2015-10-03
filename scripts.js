@@ -70,7 +70,7 @@ function toggleState() {
         window.currentPomodoroTime = window.pomodoroWorkTimeLength;
 
         //Change button label
-        actionButton.textContent = "Start Pomodoro";
+        actionButton.textContent = "Stop Pomodoro";
 
     } else if (window.pomodoroState == window.pomodoroStateConstants.RUNNING) {
 
@@ -80,7 +80,7 @@ function toggleState() {
         window.currentPomodoroTime = -1;
 
         //Change button label
-        actionButton.textContent = "Stop Pomodoro"
+        actionButton.textContent = "Start Pomodoro"
 
     } else {
         alert("Problem is toggleState()");
