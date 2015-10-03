@@ -52,11 +52,33 @@ function pomodoroTimeToLabel(pomodoroRunningTime) {
 * */
 function toggleState() {
 
-    //Change state variable
+    //Select the DOM element (HTML tag) with the id display.
+    var actionButton = document.getElementById("actionButton");
 
-    //Change button label
+    //Change state variables
+    if (window.pomodoroState == window.pomodoroStateConstants.STOPPED) {
 
-    //Change current pomodoro running time
+        window.pomodoroState = window.pomodoroStateConstants.RUNNING;
+
+        //Change current pomodoro running time
+        window.currentPomodoroTime = window.pomodoroWorkTimeLength;
+
+        //Change button label
+        actionButton.textContent = "Start Pomodoro";
+
+    } else if (window.pomodoroState == window.pomodoroStateConstants.RUNNING) {
+
+        window.pomodoroState = window.pomodoroStateConstants.STOPPED;
+
+        //Change current pomodoro running time
+        window.currentPomodoroTime = -1;
+
+        //Change button label
+        actionButton.textContent = "Stop Pomodoro"
+
+    } else {
+        alert("Problem is toggleState()");
+    }
 
 }
 
@@ -88,6 +110,7 @@ function updateTimer() {
 function startPomodoro() {
 
     //Switch state
+    toggleState();
 
     //Activate countdown
 
@@ -99,6 +122,7 @@ function startPomodoro() {
 function stopPomodoro() {
 
     //Switch state
+    toggleState();
 
     //Deactivate countdown
 
