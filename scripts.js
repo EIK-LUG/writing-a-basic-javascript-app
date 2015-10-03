@@ -30,10 +30,10 @@
     //The time currently being counted down from, -1 if pomodoro stopped
     window.currentPomodoroTime = -1;
 
-    //Minutes that the Work phase of the pomodoro lasts
+    //Minutes (seconds in testing) that the Work phase of the pomodoro lasts
     window.pomodoroWorkTimeLength = 25;
 
-    //Minutes that the Rest phase of the pomodoro lasts.
+    //Minutes (seconds in testing) that the Rest phase of the pomodoro lasts.
     window.pomodoroRestTImeLength = 5;
 
     //This ID will be used to reference the interval running the timer
@@ -49,6 +49,10 @@
 *
 * */
 function pomodoroTimeToLabel(pomodoroRunningTime) {
+
+    if (pomodoroRunningTime == -1) {
+        return "00:00:00";
+    }
 
     function pad(x) {
         if (x < 10) {
@@ -137,11 +141,9 @@ function updateTimer() {
         window.pomodorNextInterval = window.pomodorInterval;
         window.pomodorInterval = tmpNextInterval;
 
-        console.log(window.pomodorNextInterval);
-
-        if (window.pomodorNextInterval == window.pomodoroStateConstants.RUNNING_WORK) {
+        if (window.pomodorInterval == window.pomodoroStateConstants.RUNNING_WORK) {
             window.currentPomodoroTime = window.pomodoroWorkTimeLength;
-        } else if (window.pomodorNextInterval == window.pomodoroStateConstants.RUNNING_REST) {
+        } else if (window.pomodorInterval == window.pomodoroStateConstants.RUNNING_REST) {
             window.currentPomodoroTime = window.pomodoroRestTImeLength;
         } else {
             alert("Problem in updateTimer()");
