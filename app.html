@@ -6,6 +6,8 @@
     <title>Pomodoro Lite</title>
 
     <link rel=stylesheet type="text/css" href="styles.css">
+
+    <!-- These are for including material design lite -->
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.brown-red.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
@@ -13,23 +15,36 @@
 </head>
 <body>
 
-    <!-- Always shows a header, even in smaller screens. -->
+    <!-- mdl (material design lite) work by creating regular HTML elements and then applying classes to them.
+        Read more: http://www.getmdl.io/
+    -->
+
+    <!-- highest level wrapper besides body for the whole content -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+        <!--This is the header (top bar)-->
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row"
-                    style="padding: 0">
-                <!-- Title -->
+                 style="padding: 0"> <!-- Hacky... -->
+
+                <!-- Title
+                    Spacers are used to center the Title. Both spacers take up as much space as they can on either side.
+                -->
                 <div class="mdl-layout-spacer"></div>
                 <span class="mdl-layout-title">Pomodoro lite</span>
                 <div class="mdl-layout-spacer"></div>
             </div>
         </header>
+
+        <!-- More wrapper for content. -->
         <main class="mdl-layout__content">
             <div class="page-content">
 
                 <!-- Your content goes here -->
 
+                <!-- A grid system is used, read more: http://www.getmdl.io/components/index.html#layout-section/grid -->
                 <div class="mdl-grid">
+                    <!-- Spacers on both sides to center again -->
                     <div class="mdl-layout-spacer"></div>
 
                     <div class="mdl-cell mdl-cell--4-col">
@@ -43,11 +58,11 @@
                     <div class="mdl-layout-spacer"></div>
                 </div>
 
-
             </div>
 
         </main>
 
+        <!--The button is outside main only because it is a fixed absolutely positioned element. (always at the bottom of page)-->
         <button id="actionButton"
                 onclick="onActionButtonClicked()"
                 class="fixed-bottom-fab mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
@@ -57,6 +72,8 @@
 
     </div>
 
+    <!-- js files are positioned at the end because this allows the browser to load a "serviceable" UI (HTML+CSS but no JS)
+    while the loading of javascript files continues in the background.-->
     <script type="text/javascript" src="scripts.js"></script>
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
 </body>
