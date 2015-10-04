@@ -1,10 +1,15 @@
 
-.fixed-bottom-fab {
-    position: fixed;
-    bottom: 25px;
-    z-index: 1;
+#displayContainer {
+    background-color: #E0E0E0;
 }
 
 #display {
     text-align: center;
+}
+
+.fixed-bottom-fab {
+    position: fixed;
+    bottom: 45px;
+    right: 25px;
+    z-index: 1;
 }

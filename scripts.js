@@ -30,11 +30,11 @@
     //The time currently being counted down from, -1 if pomodoro stopped
     window.currPomTime = -1;
 
-    //Minutes (seconds in testing) that the Work phase of the pomodoro lasts
-    window.pomWorkTime = 25;
+    //Seconds that the Work phase of the pomodoro lasts
+    window.pomWorkTime = 25*60;
 
-    //Minutes (seconds in testing) that the Rest phase of the pomodoro lasts.
-    window.pomRestTime = 5;
+    //Seconds that the Rest phase of the pomodoro lasts.
+    window.pomRestTime = 5*60;
 
     //This ID will be used to reference the interval running the timer
     window.intervalID = undefined;
@@ -47,9 +47,9 @@
 /*Function to handle setting settings*/
 function setSetting(setting, val) {
     if (setting == "workT") {
-        window.pomWorkTime = val;
+        window.pomWorkTime = val*60;
     } else if (setting == "restT") {
-        window.pomRestTime = val;
+        window.pomRestTime = val*60;
     } else {
         console.log("Problem in setSetting()");
     }
@@ -64,8 +64,8 @@ function syncStateAndDom() {
     var restTimeLbl = document.getElementById("restTimeLbl");
     var display = document.getElementById("display");
 
-    workTimeLbl.textContent = "Work Time (" + window.pomWorkTime + " min)";
-    restTimeLbl.textContent = "Rest Time (" + window.pomRestTime + " min)";
+    workTimeLbl.textContent = "Work Time (" + window.pomWorkTime/60 + " min)";
+    restTimeLbl.textContent = "Rest Time (" + window.pomRestTime/60 + " min)";
     display.textContent = pomTimeToLabel(window.currPomTime);
 }
 
