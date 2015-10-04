@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
+    <!-- Necessary for rendering mdl correctly on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -75,7 +77,7 @@
                             <label id="restTimeLbl"
                                    for="restTime">Rest Time</label>
                             <input id="restTime" class="mdl-slider mdl-js-slider" type="range"
-                                   min="0" max="100" value="25" tabindex="0" onchange="setSetting('restT', this.value)"/>
+                                   min="0" max="100" value="5" tabindex="0" onchange="setSetting('restT', this.value)"/>
                         </p>
                     </div>
                     <div class="mdl-layout-spacer"></div>
