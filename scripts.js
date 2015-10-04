@@ -55,6 +55,12 @@ function setSetting(setting, val) {
     }
 }
 
+/*Raises notification, currently only sound. Browser notification could be added.*/
+function notify() {
+    var audio = new Audio("resources/notif.mp3");
+    audio.play();
+}
+
 /*
 * This function is called inside an interval call and will repeatedly run and sync the state values and the DOM.
 * */
@@ -159,6 +165,8 @@ function updateTimer() {
     if (!isOver(window.currPomTime)) {
         window.currPomTime--;
     } else {
+
+        notify();
 
         var tmpNextInterval = window.pomNextInterval;
 
