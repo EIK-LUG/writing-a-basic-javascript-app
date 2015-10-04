@@ -90,13 +90,14 @@ function pomTimeToLabel(pomRunTime) {
     hours = minutes = 0;
     seconds = pomRunTime;
 
-    while (seconds > 60) {
+    while (seconds >= 60) {
         seconds -= 60;
         minutes++;
-        if (minutes > 60) {
-            minutes -= 60;
-            hours++;
-        }
+    }
+
+    while (minutes >= 60) {
+        minutes -= 60;
+        hours++;
     }
 
     return pad(hours.toString()) + ":" + pad(minutes.toString()) + ":" + pad(seconds.toString());
