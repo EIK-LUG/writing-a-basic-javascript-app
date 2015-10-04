@@ -39,7 +39,35 @@
     //This ID will be used to reference the interval running the timer
     window.intervalID = undefined;
 
+    //Let syncing the state and DOM happen in the background. NOTE: 8-16ms is not detectable by the human eye
+    window.setInterval(syncStateAndDom, 10);
+
 })();
+
+/*Function to handle setting settings*/
+function setSetting(setting, val) {
+    if (setting == "workT") {
+        window.pomWorkTime = val;
+    } else if (setting == "restT") {
+        window.pomRestTime = val;
+    } else {
+        console.log("Problem in setSetting()");
+    }
+}
+
+/*
+* This function is called inside an interval call and will repeatedly run and sync the state values and the DOM.
+* */
+function syncStateAndDom() {
+
+    var workTimeLbl = document.getElementById("workTimeLbl");
+    var restTimeLbl = document.getElementById("restTimeLbl");
+    var display = document.getElementById("display");
+
+    workTimeLbl.textContent = "Work Time (" + window.pomWorkTime + " min)";
+    restTimeLbl.textContent = "Rest Time (" + window.pomRestTime + " min)";
+    display.textContent = pomTimeToLabel(window.currPomTime);
+}
 
 /*
 * This function will handle converting the current pomodoro running time to the label displayed in the HTML
@@ -144,8 +172,6 @@ function updateTimer() {
             console.log("Problem in updateTimer()");
         }
     }
-
-    document.getElementById("display").textContent = pomTimeToLabel(window.currPomTime);
 
 }
 
