@@ -12,7 +12,7 @@ This is an example repository that will contain
 The hope is that this can serve as an example to getting started with your own.
 
 ### The end result
-m
+
 ![Image of app]
 (https://raw.githubusercontent.com/EIK-LUG/writing-a-basic-javascript-app/master/resources/pomodoro-lite.png)
 
