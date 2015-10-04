@@ -26,6 +26,15 @@ Demo on heroku: [https://pomodoro-lite.herokuapp.com/](https://pomodoro-lite.her
 
 NOTE: Commits are made in very short intervals, to be more readily readable for beginners. (I suggest viewing them in split mode)
 
+### Step 0: Get basic skills
+
+To do this you will need:
+
+* Tenacity (goes for programming in general)
+* Basic understanding of HTML/CSS
+* Some familiarity with javascript
+* Good if you know how to use basic functionality in the developer tools in Google Chrome (for example). Hint: F12
+
 ### Step 1: VCS
 
 First things first VCS.
