@@ -10,6 +10,6 @@
 .fixed-bottom-fab {
     position: fixed;
     bottom: 45px;
-    right: 25px;
+    right: 10px;
     z-index: 1;
 }

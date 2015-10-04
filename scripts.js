@@ -85,7 +85,7 @@ function syncStateAndDom() {
 function pomTimeToLabel(pomRunTime) {
 
     if (pomRunTime == -1) {
-        return "00:00:00";
+        return "00:00:00" + " ina.";
     }
 
     function pad(x) {
@@ -106,7 +106,10 @@ function pomTimeToLabel(pomRunTime) {
         hours++;
     }
 
-    return pad(hours.toString()) + ":" + pad(minutes.toString()) + ":" + pad(seconds.toString());
+    return  pad(hours.toString()) + ":" +
+        pad(minutes.toString()) + ":" +
+        pad(seconds.toString()) +
+        (window.pomInterval == window.Constants.INTERVAL_WORK ? " wrk." : " rst.");
 }
 
 /*
