@@ -12,9 +12,9 @@ This is an example repository that will contain
 The hope is that this can serve as an example to getting started with your own.
 
 ### The end result
-m
+
 ![Image of app]
-(https://raw.githubusercontent.com/EIK-LUG/writing-a-basic-javascript-app/master/resources/pomodoro-lite.png)
+("https://github.com/EIK-LUG/writing-a-basic-javascript-app/tree/master/resources/pomodoro-lite.png")
 
 Demo on heroku: [https://pomodoro-lite.herokuapp.com/](https://pomodoro-lite.herokuapp.com/)
 
